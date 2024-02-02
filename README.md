@@ -1,4 +1,4 @@
-This is a SaaS boilerplate created using Next.js. The boilerplate comes with:
+This is a SaaS boilerplate created with React.js, Next.js, TypeScript and PostgreSQL. The boilerplate comes with:
 
 - A user sign in/sign up system, created with Auth.js.
 - A payment system, integrated with Stripe.
@@ -6,7 +6,7 @@ This is a SaaS boilerplate created using Next.js. The boilerplate comes with:
 - A community blog system, based on Tina CMS.
 - Several UI components, such as buttons, form inputs, cards, notifications, and more.
 
-More features and UI components coming soon.
+More features and UI components coming soon...
 
 ## Demos
 
