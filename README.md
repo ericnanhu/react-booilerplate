@@ -1,3 +1,35 @@
+This is a SaaS boilerplate created using Next.js. The boilerplate comes with:
+
+- A user sign in/sign up system, created with Auth.js.
+- A payment system, integrated with Stripe.
+- Email system, integrated with SendGrid.
+- A community blog system, based on Tina CMS.
+- Several UI components, such as buttons, form inputs, cards, notifications, and more.
+
+More features and UI components coming soon.
+
+## Demos
+
+![Home Page](/images/home-page.png)
+
+_Home Page_
+
+![Pricing Page](/images/pricing.png)
+
+_Pricing Page_
+
+![Signin Page](/images/signin.png)
+
+_Sign In Page_
+
+![Community Blog Page](/images/blog-home.png)
+
+_Community Blog Page_
+
+![Community Blog Article Page](/images/blog-article.png)
+
+_Community Blog Article Page_
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

@@ -3,12 +3,13 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import Notification from "@/components/ui/notification";
+import PricingCard from "@/components/pricingCard";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
   return (
-    <div className="h-screen flex flex-col content">
+    <div className="flex flex-col content">
       <p>
         This is a SaaS boilerplate created using Next.js. The boilerplate comes
         with:
@@ -55,8 +56,36 @@ export default async function Home() {
           Button
         </Button>
       </div>
+      <h2>Cards</h2>
+      <div className="flex flex-row flex-wrap gap-8 mx-auto justify-center">
+        <PricingCard
+          name="Subscription"
+          description="If you want to try out the course without long-term commitment."
+          price="$25/month"
+          term="monthly"
+          features={["Access to all course materials."]}
+          plan="monthly"
+          session={session}
+        />
+
+        <PricingCard
+          name="One-time Payment"
+          description="If you want to try out the course without long-term commitment"
+          price="$450"
+          term="once"
+          features={[
+            "Access to all course materials.",
+            "Life long update.",
+            "Get one boilerplate for free.",
+            "500 page PDF version of the course",
+          ]}
+          plan="onetime"
+          session={session}
+        />
+      </div>
       <div>
-        <Notification type="success" message="lorem ipsum" />
+        <h2>Notification</h2>
+        <Notification type="success" message="lorem ipsum" className />
       </div>
     </div>
   );
