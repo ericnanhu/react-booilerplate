@@ -1,91 +1,85 @@
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Button from "@/components/ui/button";
-import Input from "@/components/ui/input";
-import Notification from "@/components/ui/notification";
-import PricingCard from "@/components/pricingCard";
+import { authOptions } from "@/lib/auth";
+import client from "@/../tina/__generated__/client";
+import CourseCard from "@/components/courseCard";
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
 
+  const response = await fetch(`${process.env.APP_URL}/api/course/getAll`, {
+    method: "GET",
+    next: { revalidate: Number(process.env.REVALIDATE) },
+  });
+
+  const {
+    introduction,
+    htmlCss,
+    javascript,
+    vuejs,
+    reactjs,
+    database,
+    miscellaneous,
+  } = await response.json();
+
+  const courses = [
+    {
+      response: introduction,
+      name: "Introduction",
+      chapter: "1",
+      className: "grid-rows-2",
+    },
+    {
+      response: htmlCss,
+      name: "HTML & CSS",
+      chapter: "2",
+      className: "grid-rows-2",
+    },
+    {
+      response: javascript,
+      name: "JavaScript",
+      chapter: "3",
+      className: "grid-rows-2",
+    },
+    {
+      response: vuejs,
+      name: "Vue.js",
+      chapter: "4",
+      className: "grid-rows-2",
+    },
+    {
+      response: reactjs,
+      name: "React.js",
+      chapter: "5",
+      className: "grid-rows-2",
+    },
+    {
+      response: database,
+      name: "Database",
+      chapter: "6",
+      className: "grid-rows-2",
+    },
+    {
+      response: miscellaneous,
+      name: "Miscellaneous",
+      chapter: "7",
+      className: "grid-rows-2",
+    },
+  ];
+
   return (
-    <div className="flex flex-col content">
-      <p>
-        This is a SaaS boilerplate created using Next.js. The boilerplate comes
-        with:
-      </p>
-
-      <ul>
-        <li>A user sign in/sign up system, created with Auth.js.</li>
-        <li>A payment system, integrated with Stripe.</li>
-        <li>Email system, integrated with SendGrid.</li>
-        <li>A community blog system, based on Tina CMS.</li>
-        <li>
-          Several UI components, such as buttons, form inputs, cards,
-          notifications, and more.
-        </li>
-      </ul>
-
-      <p>More features and UI components coming soon.</p>
-
-      <h2>Buttons</h2>
-
-      <div className="flex flex-row gap-2">
-        <Button color="primary" loading={true}>
-          Button
-        </Button>
-        <Button color="primary-bordered" loading={true}>
-          Button
-        </Button>
-        <Button color="danger" loading={true}>
-          Button
-        </Button>
-        <Button color="danger-bordered" loading={true}>
-          Button
-        </Button>
-        <Button color="primary" loading={false}>
-          Button
-        </Button>
-        <Button color="primary-bordered" loading={false}>
-          Button
-        </Button>
-        <Button color="danger" loading={false}>
-          Button
-        </Button>
-        <Button color="danger-bordered" loading={false}>
-          Button
-        </Button>
-      </div>
-      <h2>Cards</h2>
-      <div className="flex flex-row flex-wrap gap-8 mx-auto justify-center">
-        <PricingCard
-          name="Subscription"
-          description="If you want to try out the course without long-term commitment."
-          price="$25/month"
-          term="monthly"
-          features={["Access to all course materials."]}
-          plan="monthly"
-          session={session}
-        />
-
-        <PricingCard
-          name="One-time Payment"
-          description="If you want to try out the course without long-term commitment"
-          price="$450"
-          term="once"
-          features={[
-            "Access to all course materials.",
-            "Life long update.",
-            "Get one boilerplate for free.",
-            "500 page PDF version of the course",
-          ]}
-          plan="onetime"
-          session={session}
-        />
-      </div>
-      <div>
-        <h2>Notification</h2>
-        <Notification type="success" message="lorem ipsum" className />
+    <div className="grid grid-cols-12">
+      <div className="hidden md:flex col-span-4">Sidebar</div>
+      <div className="col-span-12 md:col-span-8 flex flex-col gap-4">
+        {courses.map((course, index) => (
+          <CourseCard
+            key={index}
+            response={course.response}
+            name={course.name}
+            chapter={course.chapter}
+            session={session}
+            className={course.className}
+          />
+        ))}
       </div>
     </div>
   );

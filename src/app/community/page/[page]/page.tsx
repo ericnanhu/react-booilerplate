@@ -1,26 +1,24 @@
 import Link from "next/link";
 import client from "@/../tina/__generated__/client";
+import Image from "next/image";
 
-// export async function generateStaticParams() {
-//   const pageSize = 2;
+export async function generateStaticParams() {
+  const pageSize = Number(process.env.PAGE_SIZE);
+  const totalPages = Math.ceil(
+    (await client.queries.communityConnection()).data.communityConnection
+      .totalCount / pageSize
+  );
 
-//   const communityResponse = await client.queries.communityConnection({
-//     sort: "publishedAt",
-//   });
+  let pages = [];
 
-//   const articles = communityResponse.data.communityConnection.edges;
+  for (let i = 0; i < totalPages; i++) {
+    pages.push({
+      page: (i + 1).toString(),
+    });
+  }
 
-//   const paginatedArticles = articles
-//     ? articles.reduce((acc, _, index) => {
-//         if (index % pageSize === 0) {
-//           acc.push(articles.slice(index, index + pageSize));
-//         }
-//         return acc;
-//       }, [])
-//     : [];
-
-//   return paginatedArticles;
-// }
+  return pages;
+}
 
 export default async function CommunityHomePage({
   params,
@@ -29,36 +27,18 @@ export default async function CommunityHomePage({
     page: string;
   };
 }) {
-  const pageSize = 12;
-  const totalPages = Math.ceil(
-    (await client.queries.communityConnection()).data.communityConnection
-      .totalCount / pageSize
+  const response = await fetch(
+    `${process.env.APP_URL}/api/community/getPages`,
+    {
+      method: "GET",
+      next: { revalidate: Number(process.env.REVALIDATE) },
+    }
   );
 
-  // console.log(totalPages);
-
-  let communityResponse = await client.queries.communityConnection({
-    sort: "publishedAt",
-    first: pageSize,
-  });
-
-  let pages = [];
-
-  for (let i = 0; i < totalPages; i++) {
-    pages.push(communityResponse.data.communityConnection);
-    communityResponse = await client.queries.communityConnection({
-      sort: "publishedAt",
-      first: pageSize,
-      after: communityResponse.data.communityConnection.pageInfo.endCursor,
-    });
-  }
-
-  // pages.push(communityResponse.data.communityConnection);
-
-  console.log(pages);
+  const { totalPages, pages } = await response.json();
 
   const paginatedArticles = pages[Number(params.page) - 1]?.edges?.map(
-    (article) => {
+    (article: any) => {
       return {
         slug: article?.node?.id?.split("/")?.pop()?.split(".")[0] ?? "",
         title: article?.node?.title ?? "",
@@ -69,23 +49,30 @@ export default async function CommunityHomePage({
       };
     }
   );
-
-  // console.log(paginatedArticles);
-  const pageInfo = pages[Number(params.page) - 1]?.pageInfo;
-  console.log(params.page);
-  console.log(pageInfo);
-
   return (
     <div>
       <div className="flex flex-row flex-wrap gap-4 justify-center">
-        {paginatedArticles?.map((article, index) => (
+        {paginatedArticles?.map((article: any, index: any) => (
           <Link key={index} href={`/community/${article.slug}`}>
-            <div className="flex flex-col gap-2 rounded p-4 w-96 border-2 border-primary shadow-md hover:shadow-xl">
+            <div className="flex flex-col gap-2 rounded-md p-4 w-96 border-2 border-primary shadow-md hover:shadow-xl">
+              <Image
+                src={article.coverImage}
+                width={500}
+                height={500}
+                alt={article.title}
+              />
               <h2 className="text-2xl font-semibold">{article.title}</h2>
               <p>{article.description}</p>
-              <p className="font-semibold text-primary">
-                By {article.author?.name}
-              </p>
+              <div className="flex flex-row justify-between">
+                <p className="font-semibold text-primary">
+                  By {article.author?.name}
+                </p>
+                <p className="text-gray-500">
+                  {new Intl.DateTimeFormat("en-US", {
+                    dateStyle: "long",
+                  }).format(new Date(article.publishedAt))}
+                </p>
+              </div>
             </div>
           </Link>
         ))}

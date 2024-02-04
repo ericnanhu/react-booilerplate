@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 import NavBar from "@/components/navBar";
 import FooterMenu from "@/components/footerMenu";
 import { Alegreya } from "next/font/google";
 
-// const inter = Inter({ subsets: ["latin"] });
 const alegreya = Alegreya({
   weight: ["400", "700"],
   style: ["normal", "italic"],

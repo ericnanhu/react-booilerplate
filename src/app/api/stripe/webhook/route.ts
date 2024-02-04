@@ -4,9 +4,9 @@ import { headers } from "next/headers";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
-const webhookHandler = async (req: Request) => {
+const webhookHandler = async (request: Request) => {
   try {
-    const rawBody = await req.text();
+    const rawBody = await request.text();
     const signature = headers().get("stripe-signature") as string;
 
     let event: Stripe.Event;
@@ -18,8 +18,8 @@ const webhookHandler = async (req: Request) => {
         process.env.STRIPE_WEBHOOK_SECRET as string
       );
       console.log("Event created");
-    } catch (e: any) {
-      console.log(`❌ Error message: ${e}`);
+    } catch (error: any) {
+      console.log(`❌ Error message: ${error}`);
 
       return new Response("Webhook error", {
         status: 400,
@@ -56,7 +56,7 @@ const webhookHandler = async (req: Request) => {
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
       },
     });
-  } catch (e: any) {
+  } catch (error: any) {
     return new Response("Method Not Allowed", {
       status: 405,
       headers: {

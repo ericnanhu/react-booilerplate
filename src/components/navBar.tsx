@@ -40,27 +40,25 @@ export default function NavBar({ session }: NavBarProps) {
           </Link>
         </div>
         <div className="hidden md:flex flex-row gap-14">
-          <Link
-            href="/"
-            className="border-b-4 border-light hover:border-primary transition duration-150">
+          <Link href="/" className="hover:text-primary transition duration-150">
             Start your journey
           </Link>
 
           <Link
             href="/community/page/1"
-            className="border-b-4 border-light hover:border-primary transition duration-150">
+            className="hover:text-primary transition duration-150">
             Community
           </Link>
 
           <Link
             href="/pricing"
-            className="border-b-4 border-light hover:border-primary transition duration-150">
+            className="hover:text-primary transition duration-150">
             Pricing
           </Link>
 
           <Link
             href="/boilerplates"
-            className="border-b-4 border-light hover:border-primary transition duration-150">
+            className="hover:text-primary transition duration-150">
             Boilerplates
           </Link>
         </div>
@@ -94,22 +92,22 @@ export default function NavBar({ session }: NavBarProps) {
                 id="popupMenu"
                 className={`${
                   isMenuOpen ? "opacity-100" : "hidden opacity-0"
-                } flex flex-col gap-2 absolute top-10 right-5 bg-light rounded shadow-md transition-all duration-150 p-5`}>
+                } flex flex-col gap-4 absolute top-10 right-5 bg-light rounded shadow-md transition-all duration-150 p-5`}>
                 <Link
                   href="/community/page/1"
-                  className="md:hidden border-b-4 border-light hover:border-primary transition duration-150">
+                  className="md:hidden hover:text-primary transition duration-150">
                   Community
                 </Link>
 
                 <Link
                   href="/pricing"
-                  className="md:hidden border-b-4 border-light hover:border-primary transition duration-150">
+                  className="md:hidden hover:text-primary transition duration-150">
                   Pricing
                 </Link>
 
                 <Link
                   href="/boilerplates"
-                  className="md:hidden border-b-4 border-light hover:border-primary transition duration-150">
+                  className="md:hidden hover:text-primary transition duration-150">
                   Boilerplates
                 </Link>
 

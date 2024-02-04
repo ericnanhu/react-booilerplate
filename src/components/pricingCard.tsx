@@ -78,7 +78,7 @@ export default function PricingCard({
   };
 
   return (
-    <div className="flex flex-col gap-5 border-2 border-primary rounded-md shadow-md p-5">
+    <div className="flex flex-col gap-5 border-2 border-primary rounded-md shadow-md p-5 h-fit">
       <h2 className="text-2xl">{name}</h2>
 
       <p className="text-sm">{description}</p>

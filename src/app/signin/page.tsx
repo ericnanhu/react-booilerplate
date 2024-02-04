@@ -35,8 +35,8 @@ export default function SignIn() {
       <div className="flex flex-col gap-5 max-w-96">
         <h2 className="text-2xl font-bold">Sign In / Sign Up</h2>
         <p>
-          You should receive a magic link within 5 minutes. If you don't have an
-          account yet, we will automatically create one for you.
+          You should receive a magic link within 5 minutes. If you don&apos;t
+          have an account yet, we will automatically create one for you.
         </p>
         <form onSubmit={signInUser} className="flex flex-col gap-2">
           <label htmlFor="email" className="mx-1 hidden">

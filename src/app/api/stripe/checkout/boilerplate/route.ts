@@ -2,9 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
 import prisma from "@/lib/db";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
-const checkoutHandler = async (req: NextRequest, res: NextResponse) => {
+const checkoutHandler = async (request: NextRequest) => {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string);
 
   const session = await getServerSession(authOptions);
@@ -31,16 +31,15 @@ const checkoutHandler = async (req: NextRequest, res: NextResponse) => {
     },
   });
 
-  const reqBody = await req.json();
-  const plan = reqBody.plan;
+  const data = await request.json();
 
   let priceKey;
 
-  if (plan === "monthly") {
+  if (data.plan === "monthly") {
     priceKey = process.env.PRICE_KEY_MONTHLY;
-  } else if (plan === "biannually") {
+  } else if (data.plan === "biannually") {
     priceKey = process.env.PRICE_KEY_BIANNUALLY;
-  } else if (plan === "annually") {
+  } else if (data.plan === "annually") {
     priceKey = process.env.PRICE_KEY_ANNUALLY;
   }
 
