@@ -9,6 +9,10 @@ const webhookHandler = async (request: Request) => {
     const rawBody = await request.text();
     const signature = headers().get("stripe-signature") as string;
 
+    console.log("Body:" + rawBody);
+    console.log("Signature:" + signature);
+    console.log("Key:" + process.env.STRIPE_WEBHOOK_SECRET);
+
     let event: Stripe.Event;
 
     try {
@@ -17,7 +21,7 @@ const webhookHandler = async (request: Request) => {
         signature,
         process.env.STRIPE_WEBHOOK_SECRET as string
       );
-      console.log("Event created");
+      console.log("Stripe event created");
     } catch (error: any) {
       console.log(`❌ Error message: ${error}`);
 

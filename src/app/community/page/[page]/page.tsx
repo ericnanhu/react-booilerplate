@@ -3,7 +3,7 @@ import client from "@/../tina/__generated__/client";
 import Image from "next/image";
 
 export async function generateStaticParams() {
-  const pageSize = Number(process.env.PAGE_SIZE);
+  const pageSize = 12;
   const totalPages = Math.ceil(
     (await client.queries.communityConnection()).data.communityConnection
       .totalCount / pageSize
@@ -31,7 +31,6 @@ export default async function CommunityHomePage({
     `${process.env.APP_URL}/api/community/getPages`,
     {
       method: "GET",
-      next: { revalidate: Number(process.env.REVALIDATE) },
     }
   );
 

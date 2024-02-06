@@ -1,20 +1,39 @@
-import createMDX from "@next/mdx";
-import rehypeHighlight from "rehype-highlight";
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Configure `pageExtensions`` to include MDX files
-  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
-  // Optionally, add any other Next.js config below
+  // images: {
+  //   loader: "custom",
+  //   loaderFile: "./src/lib/imageLoader.ts",
+  // },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "assets.tina.io",
+        port: "",
+      },
+    ],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/api/stripe/webhook",
+        headers: [
+          { key: "Access-Control-Allow-Credentials", value: "true" },
+          { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,DELETE,PATCH,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value:
+              "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+          },
+        ],
+      },
+    ];
+  },
 };
 
-const withMDX = createMDX({
-  // Add markdown plugins here, as desired
-  options: {
-    remarkPlugins: [],
-    rehypePlugins: [rehypeHighlight],
-  },
-});
-
-// Merge MDX config with Next.js config
-export default withMDX(nextConfig);
+export default nextConfig;

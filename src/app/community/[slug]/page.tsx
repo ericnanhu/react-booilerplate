@@ -41,8 +41,11 @@ export default async function ArticlePage({
     `${process.env.APP_URL}/api/community/getSingle`,
     {
       method: "POST",
-      next: { revalidate: Number(process.env.REVALIDATE) },
-      body: `{"slug": "${params.slug}"}`,
+      // Necessary when fetching with request body
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ slug: params.slug }),
     }
   );
 

@@ -18,7 +18,7 @@ const handler = async (request: NextRequest) => {
       }
     );
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching lesson:", error);
     throw new Error("Failed to fetch lesson");
   }
 };

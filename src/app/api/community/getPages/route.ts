@@ -3,7 +3,7 @@ import client from "@/../tina/__generated__/client";
 
 const handler = async () => {
   try {
-    const pageSize = Number(process.env.PAGE_SIZE);
+    const pageSize = 12;
 
     // Total number of pages
     const totalPages = Math.ceil(
@@ -39,7 +39,7 @@ const handler = async () => {
       }
     );
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching community articles:", error);
     throw new Error("Failed to fetch community data");
   }
 };

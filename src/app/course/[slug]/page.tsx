@@ -44,8 +44,10 @@ export default async function CoursePage({
 
   const response = await fetch(`${process.env.APP_URL}/api/course/getSingle`, {
     method: "POST",
-    next: { revalidate: Number(process.env.REVALIDATE) },
-    body: `{"slug": "${params.slug}"}`,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ slug: params.slug }),
   });
 
   const { lesson } = await response.json();

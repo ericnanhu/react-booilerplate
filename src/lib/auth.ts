@@ -1,4 +1,3 @@
-import NextAuth from "next-auth";
 import type { NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/db";
@@ -61,7 +60,7 @@ export const authOptions: NextAuthOptions = {
             id: user.id,
             email: user.email,
             isActive: user.isActive,
-            stripeCustomerId: user.stripeCustomerId,
+            stripeCustomerId: user.stripeCustomerId as string,
           };
         }
       }

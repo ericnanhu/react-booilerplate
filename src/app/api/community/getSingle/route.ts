@@ -18,7 +18,7 @@ const handler = async (request: NextRequest) => {
       }
     );
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching community article:", error);
     throw new Error("Failed to fetch community article");
   }
 };

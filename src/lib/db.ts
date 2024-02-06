@@ -1,7 +1,17 @@
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
-  return new PrismaClient();
+  if (process.env.NODE_ENV !== "production") {
+    return new PrismaClient({
+      datasources: {
+        db: {
+          url: process.env.DATABASE_URL,
+        },
+      },
+    });
+  } else {
+    return new PrismaClient();
+  }
 };
 
 declare global {

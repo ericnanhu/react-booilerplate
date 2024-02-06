@@ -12,7 +12,7 @@ export default function Input({ type, className, ...props }: InputProps) {
         <input
           type="text"
           className={
-            "border-2 border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary-light transition-all duration-150 text-sm p-2" +
+            "border-2 border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary-light dark:text-dark transition-all duration-150 text-sm p-2" +
             " " +
             className
           }
@@ -23,7 +23,7 @@ export default function Input({ type, className, ...props }: InputProps) {
         <input
           type="email"
           className={
-            "border-2 border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary-light transition-all duration-150 text-sm p-2" +
+            "border-2 border-primary rounded-md focus:outline-none focus:ring-2 focus:ring-primary-light dark:text-dark transition-all duration-150 text-sm p-2" +
             " " +
             className
           }

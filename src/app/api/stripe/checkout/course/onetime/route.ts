@@ -41,8 +41,8 @@ const checkoutHandler = async (req: NextRequest, res: NextResponse) => {
       },
     ],
     // {CHECKOUT_SESSION_ID} is a string literal which the Stripe SDK will replace; do not manually change it or replace it with a variable!
-    success_url: `http://localhost:3000/?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: "http://localhost:3000/?cancelledPayment=true",
+    success_url: `${process.env.APP_URL}/?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${process.env.APP_URL}/?cancelledPayment=true`,
     payment_intent_data: {
       metadata: {
         payingUserId: user?.id as string,

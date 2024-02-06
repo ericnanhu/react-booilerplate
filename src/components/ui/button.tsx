@@ -19,10 +19,11 @@ export default function Button({
 }: ButtonProps) {
   return (
     <>
+      {/* Primary loading */}
       {color === "primary" && loading === true && (
         <button
           className={
-            "border-2  border-primary bg-primary hover:border-primary-dark hover:bg-primary-dark focus:border-primary-darker focus:bg-primary-darker focus:outline-none focus:ring focus:ring-primary-light transition-all duration-150 text-light text-sm font-semibold rounded-md px-4 py-2" +
+            "border-2 border-primary bg-primary hover:border-primary-dark hover:bg-primary-dark focus:border-primary-darker focus:bg-primary-darker focus:outline-none focus:ring focus:ring-primary-light transition-all duration-150 text-light text-sm font-semibold rounded-md px-4 py-2" +
             " " +
             className
           }
@@ -44,10 +45,11 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Primary default */}
       {color === "primary" && loading === false && (
         <button
           className={
-            "border-2  border-primary bg-primary hover:border-primary-dark hover:bg-primary-dark focus:border-primary-darker focus:bg-primary-darker focus:outline-none focus:ring focus:ring-primary-light transition-all duration-150 text-light text-sm font-semibold rounded-md px-4 py-2" +
+            "border-2 border-primary bg-primary hover:border-primary-dark hover:bg-primary-dark focus:border-primary-darker focus:bg-primary-darker focus:outline-none focus:ring focus:ring-primary-light transition-all duration-150 text-light text-sm font-semibold rounded-md px-4 py-2" +
             " " +
             className
           }
@@ -56,6 +58,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Primary bordered loading */}
       {color === "primary-bordered" && loading === true && (
         <button
           className={
@@ -81,6 +84,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Primary bordered default */}
       {color === "primary-bordered" && loading === false && (
         <button
           className={
@@ -93,6 +97,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Danger loading */}
       {color === "danger" && loading === true && (
         <button
           className={
@@ -118,6 +123,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Danger default */}
       {color === "danger" && loading === false && (
         <button
           className={
@@ -130,6 +136,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Danger bordered loading */}
       {color === "danger-bordered" && loading === true && (
         <button
           className="border-2 border-danger transition-all duration-150 text-danger text-sm font-semibold rounded-md px-4 py-2"
@@ -151,6 +158,7 @@ export default function Button({
           {children}
         </button>
       )}
+      {/* Danger bordered default */}
       {color === "danger-bordered" && loading === false && (
         <button
           className="border-2 border-danger hover:bg-danger focus:border-danger-darker focus:bg-danger-darker focus:outline-none focus:ring focus:ring-danger-light transition-all duration-150 text-danger hover:text-light focus:text-light text-sm font-semibold rounded-md px-4 py-2"

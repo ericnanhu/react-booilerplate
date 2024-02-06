@@ -1,6 +1,5 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/lib/auth";
-import client from "@/../tina/__generated__/client";
 import CourseCard from "@/components/courseCard";
 
 export default async function Home() {
@@ -8,7 +7,6 @@ export default async function Home() {
 
   const response = await fetch(`${process.env.APP_URL}/api/course/getAll`, {
     method: "GET",
-    next: { revalidate: Number(process.env.REVALIDATE) },
   });
 
   const {
@@ -26,43 +24,43 @@ export default async function Home() {
       response: introduction,
       name: "Introduction",
       chapter: "1",
-      className: "grid-rows-2",
+      height: "",
     },
     {
       response: htmlCss,
       name: "HTML & CSS",
       chapter: "2",
-      className: "grid-rows-2",
+      height: "sm:h-[26rem]",
     },
     {
       response: javascript,
       name: "JavaScript",
       chapter: "3",
-      className: "grid-rows-2",
+      height: "",
     },
     {
       response: vuejs,
-      name: "Vue.js",
+      name: "Vue.js & Nuxt.js",
       chapter: "4",
-      className: "grid-rows-2",
+      height: "",
     },
     {
       response: reactjs,
-      name: "React.js",
+      name: "React.js & Next.js",
       chapter: "5",
-      className: "grid-rows-2",
+      height: "",
     },
     {
       response: database,
       name: "Database",
       chapter: "6",
-      className: "grid-rows-2",
+      height: "",
     },
     {
       response: miscellaneous,
-      name: "Miscellaneous",
+      name: "Miscellaneous Skills",
       chapter: "7",
-      className: "grid-rows-2",
+      height: "",
     },
   ];
 
@@ -77,7 +75,7 @@ export default async function Home() {
             name={course.name}
             chapter={course.chapter}
             session={session}
-            className={course.className}
+            height={course.height}
           />
         ))}
       </div>
